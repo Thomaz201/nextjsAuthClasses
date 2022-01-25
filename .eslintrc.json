@@ -35,6 +35,7 @@
     "react/jsx-props-no-spreading": "off",
     "react/jsx-no-constructed-context-values": "off",
     "react/no-invalid-html-attribute": "off",
+    "dot-notation": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
