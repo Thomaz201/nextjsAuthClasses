@@ -33,6 +33,7 @@
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-no-constructed-context-values": "off",
     "react/no-invalid-html-attribute": "off",
     "import/extensions": [
       "error",
