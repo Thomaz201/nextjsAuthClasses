@@ -2,8 +2,9 @@ import { FormEvent, useState } from 'react';
 import { useAuthenticationContext } from '../contexts/AuthContext';
 
 import styles from '../styles/Home.module.css';
+import { withSSRGuest } from '../utils/withSSRGuest';
 
-const Home = () => {
+export default function Home() {
   const { signIn } = useAuthenticationContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,6 +37,10 @@ const Home = () => {
       <button type="submit">Entrar</button>
     </form>
   );
-};
+}
 
-export default Home;
+export const getServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {},
+  };
+});
