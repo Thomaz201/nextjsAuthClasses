@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useAuthenticationContext } from '../contexts/AuthContext';
-import { api } from '../services/api';
+import { setupApiClient } from '../services/api';
+import { api } from '../services/apiClient';
+import { withSSRAuth } from '../utils/withSSRAuth';
 
 export default function Dashboard() {
   const { user } = useAuthenticationContext();
@@ -17,3 +19,14 @@ export default function Dashboard() {
     </div>
   );
 }
+
+export const getServerSideProps = withSSRAuth(async (ctx) => {
+  const apiClientOnBackend = setupApiClient(ctx);
+  const response = await apiClientOnBackend.get('/me');
+
+  console.log(response.data);
+
+  return {
+    props: {},
+  };
+});
