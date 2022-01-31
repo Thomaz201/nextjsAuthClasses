@@ -12,6 +12,7 @@ export function withSSRGuest<P>(fn: GetServerSideProps<P>): GetServerSideProps {
     const cookies = parseCookies(ctx);
 
     if (cookies['nextauth.token']) {
+      // validar em chamada pra api se o token recuperado é válido
       return {
         redirect: {
           destination: '/dashboard',

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Can } from '../components/Can';
 import { useAuthenticationContext } from '../contexts/AuthContext';
 import { setupApiClient } from '../services/api';
 import { api } from '../services/apiClient';
@@ -13,9 +14,14 @@ export default function Dashboard() {
       .then((response) => console.log(response))
       .catch((error) => console.log('error dashboard', error));
   }, []);
+
   return (
     <div>
       <h1>Dashboard de quem está logado: {user?.email}</h1>
+
+      <Can permissions={['metrics.list']}>
+        <div>Métricas</div>
+      </Can>
     </div>
   );
 }
