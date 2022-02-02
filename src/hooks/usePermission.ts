@@ -1,4 +1,5 @@
 import { useAuthenticationContext } from '../contexts/AuthContext';
+import { validateUserPermissions } from '../utils/validateUserPermissions';
 
 type UsePermissionParams = {
   permissions?: string[];
@@ -15,25 +16,15 @@ export function usePermission({
     return false;
   }
 
-  if (permissions?.length > 0) {
-    const hasAllPermissions = permissions.every((permission) => {
-      return user?.permissions.includes(permission);
+  if (user) {
+    const userHasValidPermissions = validateUserPermissions({
+      user,
+      roles,
+      permissions,
     });
 
-    if (!hasAllPermissions) {
-      return false;
-    }
+    return userHasValidPermissions;
   }
 
-  if (roles?.length > 0) {
-    const hasAllRoles = roles.some((role) => {
-      return user?.roles.includes(role);
-    });
-
-    if (!hasAllRoles) {
-      return false;
-    }
-  }
-
-  return true;
+  return false;
 }
